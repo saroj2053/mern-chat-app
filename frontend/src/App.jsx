@@ -1,5 +1,8 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Signin from "./pages/Signin/Signin";
+import Signup from "./pages/Signup/Signup";
+import Home from "./pages/Home/Home";
 
 function App() {
   return (
