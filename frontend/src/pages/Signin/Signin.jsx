@@ -1,23 +1,30 @@
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
-  Checkbox,
   Container,
-  Divider,
   FormControl,
   FormLabel,
   Heading,
-  HStack,
   Image,
   Input,
   Stack,
   Text,
 } from "@chakra-ui/react";
 import logo from "../../assets/web-logo.png";
+import useSignin from "../../hooks/useSignin";
 
 const Signin = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { loading, signin } = useSignin();
+
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
+    await signin(username, password);
+  };
   return (
     <Box
       h="100vh"
@@ -58,18 +65,35 @@ const Signin = () => {
               <Stack spacing="5">
                 <FormControl>
                   <FormLabel htmlFor="username">Username</FormLabel>
-                  <Input id="username" type="text" />
+                  <Input
+                    id="username"
+                    type="text"
+                    value={username}
+                    onChange={(evt) => setUsername(evt.target.value)}
+                  />
                 </FormControl>
               </Stack>
               <Stack spacing="5">
                 <FormControl>
                   <FormLabel htmlFor="password">Password</FormLabel>
-                  <Input id="password" type="password" />
+                  <Input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(evt) => setPassword(evt.target.value)}
+                  />
                 </FormControl>
               </Stack>
 
               <Stack spacing="6">
-                <Button>Sign in</Button>
+                <Button
+                  onClick={handleSubmit}
+                  isDisabled={loading}
+                  isLoading={loading}
+                  loadingText="Signing in..."
+                >
+                  Sign in
+                </Button>
               </Stack>
               <Text color="fg.muted">
                 Don't have an account? <Link to="/signup">Sign up</Link>

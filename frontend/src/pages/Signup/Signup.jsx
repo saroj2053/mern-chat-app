@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Box,
@@ -13,8 +13,26 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import useSignup from "../../hooks/useSignup";
 
 const Signup = () => {
+  const { loading, signup } = useSignup();
+  const [formData, setFormData] = useState({
+    fullName: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+    gender: "",
+  });
+
+  const handleCheckboxChange = (gender) => {
+    setFormData({ ...formData, gender: gender });
+  };
+
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
+    await signup(formData);
+  };
   return (
     <Box
       minH="100vh"
@@ -52,19 +70,40 @@ const Signup = () => {
               <Stack spacing="5">
                 <FormControl>
                   <FormLabel htmlFor="fullName">Full Name</FormLabel>
-                  <Input id="fullName" type="text" />
+                  <Input
+                    id="fullName"
+                    type="text"
+                    value={formData.fullName}
+                    onChange={(evt) =>
+                      setFormData({ ...formData, fullName: evt.target.value })
+                    }
+                  />
                 </FormControl>
               </Stack>
               <Stack spacing="5">
                 <FormControl>
                   <FormLabel htmlFor="username">Username</FormLabel>
-                  <Input id="username" type="text" />
+                  <Input
+                    id="username"
+                    type="text"
+                    value={formData.username}
+                    onChange={(evt) =>
+                      setFormData({ ...formData, username: evt.target.value })
+                    }
+                  />
                 </FormControl>
               </Stack>
               <Stack spacing="5">
                 <FormControl>
                   <FormLabel htmlFor="password">Password</FormLabel>
-                  <Input id="password" type="password" />
+                  <Input
+                    id="password"
+                    type="password"
+                    value={formData.password}
+                    onChange={(evt) =>
+                      setFormData({ ...formData, password: evt.target.value })
+                    }
+                  />
                 </FormControl>
               </Stack>
               <Stack spacing="5">
@@ -72,7 +111,17 @@ const Signup = () => {
                   <FormLabel htmlFor="confirmPassword">
                     Confirm Password
                   </FormLabel>
-                  <Input id="confirmPassword" type="password" />
+                  <Input
+                    id="confirmPassword"
+                    type="password"
+                    value={formData.confirmPassword}
+                    onChange={(evt) =>
+                      setFormData({
+                        ...formData,
+                        confirmPassword: evt.target.value,
+                      })
+                    }
+                  />
                 </FormControl>
               </Stack>
               <Stack spacing={5} direction="row">
@@ -81,13 +130,32 @@ const Signup = () => {
                     Gender
                   </FormLabel>
                   <HStack spacing="5">
-                    <Checkbox name="gender">Male</Checkbox>
-                    <Checkbox name="gender">Female</Checkbox>
+                    <Checkbox
+                      name="gender"
+                      isChecked={formData.gender === "male"}
+                      onChange={() => handleCheckboxChange("male")}
+                    >
+                      Male
+                    </Checkbox>
+                    <Checkbox
+                      name="gender"
+                      isChecked={formData.gender === "female"}
+                      onChange={() => handleCheckboxChange("female")}
+                    >
+                      Female
+                    </Checkbox>
                   </HStack>
                 </FormControl>
               </Stack>
               <Stack spacing="6">
-                <Button>Sign Up</Button>
+                <Button
+                  onClick={handleSubmit}
+                  isDisabled={loading}
+                  isLoading={loading}
+                  loadingText="Signing up..."
+                >
+                  Sign Up
+                </Button>
               </Stack>
               <Text color="fg.muted">
                 Already have an account? <Link to="/">Sign in</Link>
