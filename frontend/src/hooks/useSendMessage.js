@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useConversation from "../../store/useConversation";
+import useConversation from "../store/useConversation";
 import { useToast } from "@chakra-ui/react";
 
 const useSendMessage = () => {

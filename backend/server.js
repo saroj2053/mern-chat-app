@@ -5,8 +5,7 @@ import dbConnection from "./config/db.js";
 import authRoutes from "./routes/auth.js";
 import messageRoutes from "./routes/message.js";
 import userRoutes from "./routes/user.js";
-
-const app = express();
+import { app, server } from "./socket/socket.js";
 
 dotenv.config();
 
@@ -23,7 +22,7 @@ app.get("/", (req, res) => {
   res.send(`<h1>Welcome to Mern Chat App</h1>`);
 });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   dbConnection();
   console.log(`Server is listening on ${PORT}`);
 });

@@ -1,7 +1,7 @@
 import { Avatar, Box, HStack, Stack, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 import useAuthContext from "../../context/AuthContext";
-import useConversation from "../../../store/useConversation";
+import useConversation from "../../store/useConversation";
 
 const Message = ({ message }) => {
   const { authUser } = useAuthContext();
@@ -23,6 +23,7 @@ const Message = ({ message }) => {
     });
     return time;
   };
+
   return (
     <Box display="flex" justifyContent={chatAlignmentClass} m="30px 0">
       <HStack justifyContent="flex-end" key={message._id}>

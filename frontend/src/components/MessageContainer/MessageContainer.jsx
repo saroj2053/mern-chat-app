@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Messages from "./Messages";
 import MessageInput from "./MessageInput";
 import { BiSolidMessageRoundedDetail } from "react-icons/bi";
-import useConversation from "../../../store/useConversation";
+import useConversation from "../../store/useConversation";
 import useAuthContext from "../../context/AuthContext";
 
 const MessageContainer = () => {

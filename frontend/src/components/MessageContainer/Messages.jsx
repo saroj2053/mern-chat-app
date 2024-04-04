@@ -2,9 +2,11 @@ import { Box, Text, Heading } from "@chakra-ui/react";
 import React, { useEffect, useRef } from "react";
 import Message from "./Message";
 import useGetMessage from "../../hooks/useGetMessage";
+import useListenMessages from "../../hooks/useListenMessages";
 
 const Messages = () => {
   const { messages, loading } = useGetMessage();
+  useListenMessages();
   const toLastMessageRef = useRef();
 
   useEffect(() => {
