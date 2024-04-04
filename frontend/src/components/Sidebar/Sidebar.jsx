@@ -1,4 +1,4 @@
-import { Box, Divider, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 import Conversations from "./Conversations";
 
@@ -11,6 +11,10 @@ const Sidebar = () => {
       w="400px"
       p="0 20px"
     >
+      {/* <Text p="1rem" fontSize="1.25rem">
+        Conversations
+      </Text> */}
+
       <Conversations />
     </Box>
   );

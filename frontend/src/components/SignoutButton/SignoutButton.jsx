@@ -6,6 +6,11 @@ const SignoutButton = () => {
   const { loading, signout } = useSignout();
   return (
     <Button
+      w="full"
+      bg="red.400"
+      color="#fff"
+      display="block"
+      _hover={{ bg: "red.500" }}
       onClick={signout}
       isDisabled={loading}
       isLoading={loading}

@@ -3,10 +3,14 @@ import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import MessageContainer from "../../components/MessageContainer/MessageContainer";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   return (
     <div className="home">
+      <Helmet>
+        <title>Home | Mern Chat App </title>
+      </Helmet>
       <Navbar />
       <Container maxW="container.xl">
         <HStack gap="0">

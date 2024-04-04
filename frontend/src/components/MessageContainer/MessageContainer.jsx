@@ -4,6 +4,7 @@ import Messages from "./Messages";
 import MessageInput from "./MessageInput";
 import { BiSolidMessageRoundedDetail } from "react-icons/bi";
 import useConversation from "../../../store/useConversation";
+import useAuthContext from "../../context/AuthContext";
 
 const MessageContainer = () => {
   const { selectedConversation, setSelectedConversation } = useConversation();
@@ -46,6 +47,7 @@ const MessageContainer = () => {
 export default MessageContainer;
 
 const ConversationNotSelected = () => {
+  const { authUser } = useAuthContext();
   return (
     <Box
       bg="blue.100"
@@ -56,7 +58,7 @@ const ConversationNotSelected = () => {
       alignItems="center"
     >
       <Box textAlign="center">
-        <Heading py="3">Welcome Saroj Sah</Heading>
+        <Heading py="3">Welcome {authUser.fullName}</Heading>
         <Text py="3">Select a conversation to start messaging</Text>
         <Box
           display="flex"
